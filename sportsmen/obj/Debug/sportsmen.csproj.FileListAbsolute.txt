@@ -5,3 +5,10 @@ C:\Users\Ваня\Desktop\sportsmen\obj\Debug\sportsmen.csproj.AssemblyReference
 C:\Users\Ваня\Desktop\sportsmen\obj\Debug\sportsmen.csproj.CoreCompileInputs.cache
 C:\Users\Ваня\Desktop\sportsmen\obj\Debug\sportsmen.exe
 C:\Users\Ваня\Desktop\sportsmen\obj\Debug\sportsmen.pdb
+C:\Users\prdb\Desktop\sportsmen\bin\Debug\sportsmen.exe.config
+C:\Users\prdb\Desktop\sportsmen\bin\Debug\sportsmen.exe
+C:\Users\prdb\Desktop\sportsmen\bin\Debug\sportsmen.pdb
+C:\Users\prdb\Desktop\sportsmen\obj\Debug\sportsmen.csproj.AssemblyReference.cache
+C:\Users\prdb\Desktop\sportsmen\obj\Debug\sportsmen.csproj.CoreCompileInputs.cache
+C:\Users\prdb\Desktop\sportsmen\obj\Debug\sportsmen.exe
+C:\Users\prdb\Desktop\sportsmen\obj\Debug\sportsmen.pdb
