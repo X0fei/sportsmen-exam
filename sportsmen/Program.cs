@@ -54,1650 +54,374 @@ namespace sportsmen
         }
         static void Choise(string[,] table)
         {
-            Console.WriteLine("Выберите действие (напишите цифру и нажмите <Enter>)" +
-                "\n1. Выборка   2. Выход");
-            string input = Console.ReadLine();
-            switch (input)
+            Console.WriteLine("Выберите имя:\n1. Иван Иванов   2.Пётр Петров   3. Семён Семёнов   " +
+                                      "4. Алексей Смирнов   5. Антон Антонов");
+            string inputName = Console.ReadLine();
+            switch (inputName)
             {
                 case "1":
-                    Filter(table);
+                    inputName = "Иван Иванов";
                     break;
                 case "2":
-                    Console.Clear();
+                    inputName = "Пётр Петров";
+                    break;
+                case "3":
+                    inputName = "Семён Семёнов";
+                    break;
+                case "4":
+                    inputName = "Алексей Смирнов";
+                    break;
+                case "5":
+                    inputName = "Антон Антонов";
                     break;
                 default:
                     Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
                     Choise(table);
                     break;
             }
+            Filter(table, inputName);
         }
-        static void Filter(string[,] table)
+        static void Filter(string[,] table, string inputName)
         {
-            string input;
-            string nationality = "";
-            Console.WriteLine("\nПо какому параметру хотите отфильтровать?" +
-                              "\n1. Имя");
+            for (int i = 0; i < 20; i++)
+            {
+                if (table[i, 1] != inputName)
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        table[i, j] = "";
+                    }
+                }
+            }
+            Console.Clear();
+            for (int i = 0; i < 20; i++)
+            {
+                if (table[i, 1] != "")
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+
+                        Console.Write($"{table[i, j]}  ");
+                    }
+                    Console.WriteLine("\n");
+                }
+            }
+            Sort(table);
+        }
+        static void Sort(string[,] table)
+        {
+            Console.WriteLine("\nПо какому параметру хотите отсортировать?\n1. Возраст    2. Национальность    3. Вид спорта");
             string inputSort = Console.ReadLine();
             switch (inputSort)
             {
                 case "1":
-                    Console.WriteLine("Выберите имя:\n1. Иван Иванов   2.Пётр Петров   3. Семён Семёнов   " +
-                                      "4. Алексей Смирнов   5. Антон Антонов");
-                    input = Console.ReadLine();
-                    if (input != "1" && input != "2" && input != "3" && input != "4" && input != "5")
-                    {
-                        Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                        Choise(table);
-                    }
-                    else
-                        Sort(table, input, inputSort, nationality);
-                    break;
-                //case "2":
-
-                //    break;
-                //case "3":
-                    //Console.WriteLine("Выберите национальность:\n1. Русский   2.Украинец   3. Беларус   " +
-                    //                  "4. Казах   5. Болгария");
-                    //input = Console.ReadLine();
-                    //switch (input)
-                    //{
-                    //    case "1":
-                    //        nationality = "Русский";
-                    //        Sort(table, input, inputSort, nationality);
-                    //        break;
-                    //    case "2":
-                    //        nationality = "Украинец";
-                    //        Sort(table, input, inputSort, nationality);
-                    //        break;
-                    //    case "3":
-                    //        nationality = "Беларус";
-                    //        Sort(table, input, inputSort, nationality);
-                    //        break;
-                    //    case "4":
-                    //        nationality = "Казах";
-                    //        Sort(table, input, inputSort, nationality);
-                    //        break;
-                    //    case "5":
-                    //        nationality = "Болгария";
-                    //        Sort(table, input, inputSort, nationality);
-                    //        break;
-                    //    default:
-                    //        Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                    //        Choise(table);
-                    //        break;
-                    //}
-                //    break;
-                //case "4":
-
-                //    break;
-                //case "5":
-
-                //    break;
-                default:
-                    Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                    Filter(table);
-                    break;
-            }
-        }
-        static void Sort(string[,] table, string input, string inputSort, string nationality)
-        {
-            Console.WriteLine("Хотите отсортировать список?\n1. Да    2. Нет (не готово)");
-            string input2 = Console.ReadLine();
-            switch (input2)
-            {
-                case "1":
+                    Console.WriteLine("\n1. От большего к меньшему    2. От меньшего к большему");
+                    inputSort = Console.ReadLine();
                     switch (inputSort)
                     {
                         case "1":
-                            Console.WriteLine("\nПо какому параметру хотите отсортировать?" +
-                                              "\n1. Возраст    2. Национальность    3. Вид спорта");
-                            input2 = Console.ReadLine();
-                            switch (input2)
+                            Console.Clear();
+                            for (int year = 48; year >= 18; year--)
                             {
-                                case "1":
-                                    Console.WriteLine("1. От большего к меньшему    2. От меньшего к большему");
-                                    input2 = Console.ReadLine();
-                                    switch (input2)
+                                for (int i = 0; i < 20; i++)
+                                {
+                                    if (table[i, 1] != "")
                                     {
-                                        case "1":
-                                            Console.Clear();
-                                            for (int year = 48; year >= 18; year--)
+                                        if (year == Convert.ToInt32(table[i, 2]))
+                                        {
+                                            for (int j = 0; j < 6; j++)
                                             {
-                                                for (int i = 0; i < 20; i++)
-                                                {
-                                                    if (year == Convert.ToInt32(table[i, 2]))
-                                                    {
-                                                        switch (input)
-                                                        {
-                                                            case "1":
-                                                                if (table[i, 1] == "Иван Иванов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "2":
-                                                                if (table[i, 1] == "Пётр Петров")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "3":
-                                                                if (table[i, 1] == "Семён Семёнов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "4":
-                                                                if (table[i, 1] == "Алексей Смирнов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "5":
-                                                                if (table[i, 1] == "Антон Антонов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                        }
-                                                    }
-                                                }
+                                                Console.Write($"{table[i, j]}  ");
                                             }
-                                            break;
-                                        case "2":
-                                            Console.Clear();
-                                            for (int year = 18; year <= 48; year++)
-                                            {
-                                                for (int i = 0; i < 20; i++)
-                                                {
-                                                    if (year == Convert.ToInt32(table[i, 2]))
-                                                    {
-                                                        switch (input)
-                                                        {
-                                                            case "1":
-                                                                if (table[i, 1] == "Иван Иванов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "2":
-                                                                if (table[i, 1] == "Пётр Петров")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "3":
-                                                                if (table[i, 1] == "Семён Семёнов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "4":
-                                                                if (table[i, 1] == "Алексей Смирнов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                            case "5":
-                                                                if (table[i, 1] == "Антон Антонов")
-                                                                {
-                                                                    for (int j = 0; j < 6; j++)
-                                                                    {
-                                                                        Console.Write($"{table[i, j]}  ");
-                                                                    }
-                                                                    Console.WriteLine("\n");
-                                                                }
-                                                                break;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        default:
-                                            Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                                            Sort(table, input, inputSort, nationality);
-                                            break;
+                                            Console.WriteLine("\n");
+                                        }
                                     }
-                                    break;
-                                case "2":
-                                    Console.WriteLine("1. От А до Я    2. От Я до А");
-                                    input2 = Console.ReadLine();
-                                    switch (input2)
-                                    {
-                                        case "1":
-                                            Console.Clear();
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Беларус")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Болгария")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Казах")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Русский")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Украинец")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case "2":
-                                            Console.Clear();
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Украинец")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Русский")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Казах")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Болгария")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Беларус")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        default:
-                                            Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                                            Sort(table, input, inputSort, nationality);
-                                            break;
-                                    }
-                                    break;
-                                case "3":
-                                    Console.WriteLine("1. От А до Я    2. От Я до А");
-                                    input2 = Console.ReadLine();
-                                    switch (input2)
-                                    {
-                                        case "1":
-                                            Console.Clear();
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Единоборства")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Прыжки в воду")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Прыжки в длину")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Фехтование")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Фигурное катание")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case "2":
-                                            Console.Clear();
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Фигурное катание")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Фехтование")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Прыжки в длину")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 4] == "Прыжки в воду")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < 20; i++)
-                                            {
-                                                if (table[i, 3] == "Единоборства")
-                                                {
-                                                    switch (input)
-                                                    {
-                                                        case "1":
-                                                            if (table[i, 1] == "Иван Иванов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "2":
-                                                            if (table[i, 1] == "Пётр Петров")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "3":
-                                                            if (table[i, 1] == "Семён Семёнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "4":
-                                                            if (table[i, 1] == "Алексей Смирнов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                        case "5":
-                                                            if (table[i, 1] == "Антон Антонов")
-                                                            {
-                                                                for (int j = 0; j < 6; j++)
-                                                                {
-                                                                    Console.Write($"{table[i, j]}  ");
-                                                                }
-                                                                Console.WriteLine("\n");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        default:
-                                            Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                                            Sort(table, input, inputSort, nationality);
-                                            break;
-                                    }
-                                    break;
-                                //case "4":
-                                //    Console.WriteLine("1. От большего к меньшему    2. От меньшего к большему");
-                                //    input2 = Console.ReadLine();
-                                //    switch (input2)
-                                //    {
-                                //        case "1":
-                                //            Console.Clear();
-                                //            for (double mark = 10; mark >= 0; mark -= 0.1)
-                                //            {
-                                //                for (int i = 0; i < 20; i++)
-                                //                {
-                                //                    if (mark == Double.Parse(table[i, 5]))
-                                //                    {
-                                //                        switch (input)
-                                //                        {
-                                //                            case "1":
-                                //                                if (table[i, 1] == "Иван Иванов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "2":
-                                //                                if (table[i, 1] == "Пётр Петров")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "3":
-                                //                                if (table[i, 1] == "Семён Семёнов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "4":
-                                //                                if (table[i, 1] == "Алексей Смирнов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "5":
-                                //                                if (table[i, 1] == "Антон Антонов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                        }
-                                //                    }
-                                //                }
-                                //            }
-                                //            break;
-                                //        case "2":
-                                //            Console.Clear();
-                                //            for (double mark = 0; mark <= 10; mark += 0.1)
-                                //            {
-                                //                for (int i = 0; i < 20; i++)
-                                //                {
-                                //                    if (mark == Double.Parse(table[i, 5]))
-                                //                    {
-                                //                        switch (input)
-                                //                        {
-                                //                            case "1":
-                                //                                if (table[i, 1] == "Иван Иванов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "2":
-                                //                                if (table[i, 1] == "Пётр Петров")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "3":
-                                //                                if (table[i, 1] == "Семён Семёнов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "4":
-                                //                                if (table[i, 1] == "Алексей Смирнов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                            case "5":
-                                //                                if (table[i, 1] == "Антон Антонов")
-                                //                                {
-                                //                                    for (int j = 0; j < 6; j++)
-                                //                                    {
-                                //                                        Console.Write($"{table[i, j]}  ");
-                                //                                    }
-                                //                                    Console.WriteLine("\n");
-                                //                                }
-                                //                                break;
-                                //                        }
-                                //                    }
-                                //                }
-                                //            }
-                                //            break;
-                                //        default:
-                                //            Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                                //            Sort(table, input, inputSort, nationality);
-                                //            break;
-                                //    }
-                                //    break;
-                                default:
-                                    Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                                    Sort(table, input, inputSort, nationality);
-                                    break;
+                                }
                             }
                             break;
-                        //case "2":
-
-                        //    break;
-                        //case "3":
-                        //    for (int i = 0; i < 20; i++)
-                        //    {
-                        //        if (table[i, 3] != nationality)
-                        //        {
-                        //            for (int j = 0; j < 6; j++)
-                        //            {
-                        //                table[i, j] = "";
-                        //            }
-                        //        }
-                        //    }
-                        //    for (int i = 0; i < 20; i++)
-                        //    {
-                        //        for (int j = 0; j < 6; j++)
-                        //        {
-                        //            if (table[i, j] != "")
-                        //                Console.Write($"{table[i, j]}  ");
-                        //        }
-                        //        Console.WriteLine("\n");
-                        //    }
-                        //    break;
-                        //case "4":
-
-                        //    break;
-                        //case "5":
-
-                        //    break;
+                        case "2":
+                            Console.Clear();
+                            for (int year = 18; year <= 48; year++)
+                            {
+                                for (int i = 0; i < 20; i++)
+                                {
+                                    if (table[i, 1] != "")
+                                    {
+                                        if (year == Convert.ToInt32(table[i, 2]))
+                                        {
+                                            for (int j = 0; j < 6; j++)
+                                            {
+                                                Console.Write($"{table[i, j]}  ");
+                                            }
+                                            Console.WriteLine("\n");
+                                        }
+                                    }
+                                }
+                            }
+                            break;
                         default:
                             Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                            Filter(table);
+                            Sort(table);
                             break;
                     }
-
                     break;
-                //case "2":
-                //    break;
+                case "2":
+                    Console.WriteLine("\n1. От А до Я    2. От Я до А");
+                    inputSort = Console.ReadLine();
+                    switch (inputSort)
+                    {
+                        case "1":
+                            Console.Clear();
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Беларус")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Болгария")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Казах")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Русский")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Украинец")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            break;
+                        case "2":
+                            Console.Clear();
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Украинец")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Русский")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Казах")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Болгария")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Беларус")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
+                            Sort(table);
+                            break;
+                    }
+                    break;
+                case "3":
+                    Console.WriteLine("\n1. От А до Я    2. От Я до А");
+                    inputSort = Console.ReadLine();
+                    switch (inputSort)
+                    {
+                        case "1":
+                            Console.Clear();
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Единоборства")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Прыжки в воду")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Прыжки в длину")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Фехтование")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Фигурное катание")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            break;
+                        case "2":
+                            Console.Clear();
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Фигурное катание")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Фехтование")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Прыжки в длину")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 4] == "Прыжки в воду")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                if (table[i, 3] == "Единоборства")
+                                {
+                                    for (int j = 0; j < 6; j++)
+                                    {
+                                        Console.Write($"{table[i, j]}  ");
+                                    }
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
+                            Sort(table);
+                            break;
+                    }
+                    break;
                 default:
                     Console.WriteLine("ОШИБКА!!! Попробуйте ещё раз\n");
-                    Sort(table, input, inputSort, nationality);
+                    Sort(table);
                     break;
             }
         }
